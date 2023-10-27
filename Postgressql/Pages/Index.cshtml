@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>Add test element</h2>
+<form method="post">
+    <label for="name">Vardas:</label>
+    <input type="text" id="name" name="Name" />
+
+    <label for="description">Aprašymas:</label>
+    <input type="text" id="description" name="Description" />
+
+    <button type="submit">Add</button>
+</form>
+
+<h2>Delete Session by Id</h2>
+<form method="post">
+    <label for="id">Session Id</label>
+    <input type="text" id="sessionId" name="SessionId"/>
+    <button type="submit" asp-page-handler="DeleteSession">Delete</button>
+</form>
+
+<h2>Update session by Id</h2>
+<form method="post">
+    <label for="id">Session Id</label>
+    <input type="text" id="sessionId" name="SessionId" />
+    <label for="returnUrl">returnUrl</label>
+    <input type="text" id="returnUrl" name="returnUrl" />
+    <button type="submit" asp-page-handler="UpdateReturnUrl">Update</button>
+</form>
+
+<h2>Get by Token</h2>
+<form method="post">
+    <label for="id">Token</label>
+    <input type="text" id="Token" name="Token" />
+    <button type="submit" asp-page-handler="GetBySessionToken">Get</button>
+</form>
+
+@if (Model.RetrievedSession != null)
+{
+    <h3>Session Details</h3>
+    <p><strong>ID:</strong> @Model.RetrievedSession.Id</p>
+    <p><strong>Token:</strong> @Model.RetrievedSession.Token</p>
+    <p><strong>Started At:</strong> @Model.RetrievedSession.StartedAt</p>
+    <p><strong>Return URL:</strong> @Model.RetrievedSession.ReturnUrl</p>
+}
+else
+{
+    <p>No session found for the provided token.</p>
+}
+
